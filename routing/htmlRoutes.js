@@ -18,8 +18,8 @@ function handleRequest(request, response) {
     };
 };
 
-function displayRoot(url, request, response) {
-    const home = ../public/home.html;
-    response.writeHead(200, {"Content-Type": "text/html});
-    response.end(home);
-};
+// function displayRoot(url, request, response) {
+//     const home = ../public/home.html;
+//     response.writeHead(200, {"Content-Type": "text/html});
+//     response.end(home);
+// };

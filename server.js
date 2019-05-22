@@ -7,8 +7,9 @@ const PORT = process.env.PORT || 4000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-require("./routing/apiRoutes.js");
-require("./routing/htmlRoutes.js");
+console.log(require);
+require("./routing/apiRoutes")(app);
+require("./routing/htmlRoutes")(app);
 
 app.listen(PORT, function() {
     console.log("app listening at PORT: "+ PORT);

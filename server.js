@@ -4,7 +4,7 @@ const http = require("http");
 
 const PORT = 4000;
 
-const server = http.createServer(handlRequest);
+const server = http.createServer(handleRequest);
 
 server.listen(PORT, function() {
     console.log("listening on port: "+ PORT);

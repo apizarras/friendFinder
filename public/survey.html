@@ -14,7 +14,7 @@
 </head>
 <body>
     <body>
-
+        <form id="surveyForm">
         <div class="container">
       
           <h2>Survey Questions</h2>
@@ -236,7 +236,7 @@
           <!-- Submit Button -->
           <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i>
            Submit</button>
-      
+        </form>
           <hr>
         <footer>
             <div class="container">
@@ -260,7 +260,7 @@
               </div>
               <div class="modal-body">
                 <h2 id="match-name"></h2>
-                <img id="match-img" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg" alt="">
+                <img id="match-img" src="" alt="" width=100px height=100px>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -272,7 +272,7 @@
       
         <script type="text/javascript">
           // Chosen CSS
-          var config = {
+          const config = {
             ".chosen-select": {},
             ".chosen-select-deselect": {
               allow_single_deselect: true
@@ -288,7 +288,7 @@
             }
           };
       
-          for (var selector in config) {
+          for (selector in config) {
             $(selector).chosen(config[selector]);
           }
       
@@ -298,7 +298,7 @@
       
             // Form validation
             function validateForm() {
-              var isValid = true;
+              let isValid = true;
               $(".form-control").each(function() {
                 if ($(this).val() === "") {
                   isValid = false;
@@ -317,7 +317,7 @@
             // If all required fields are filled
             if (validateForm()) {
               // Create an object for the user"s data
-              var userData = {
+              const userData = {
                 name: $("#name").val(),
                 photo: $("#photo").val(),
                 scores: [
@@ -349,7 +349,8 @@
       
                 // Show the modal with the best match
                 $("#results-modal").modal("toggle");
-      
+                //reset form
+                $("#surveyForm").reset();
               });
             } else {
               alert("Please fill out all fields before submitting!");

@@ -15,6 +15,9 @@
   "bugs": {
     "url": "https://github.com/apizarras/friendFinder/issues"
   },
+  "engines": {
+    "node": "v10.15.0"
+  },
   "homepage": "https://github.com/apizarras/friendFinder#readme",
   "dependencies": {
     "express": "^4.17.0",

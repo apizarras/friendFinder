@@ -5,40 +5,32 @@ console.log(friends);
 module.exports = function(app) {
     app.get("/api/friends", function(request, response) {
         response.send(friends);
+        response.json(friends);
     });
     app.post("/api/friends", function(request, response) {
-        friends.push(request.body);
-    });
-    app.get("/api/match",function(req,res){
+        
+        const user = request.body;
+
+        for(i=0;i<user.scores.length; i++) {
+            user.scores[i] = parseInt(user.scores[i]);
+        }
+
         var minMatchFactor = 50;
-        var matchIndex = -1;
-  
-          //loop through the array of objects and match the last object's answers with all other
-          //objects to find the closest match
-          for(var i =0;i<FRIENDS.length-1;i++){
-  
-              //we get the sum of absolute differences between two users' answers for each question
-              matchFactor = 
-              Math.abs(friends[friends.length-1].answers[0] - friends[i].answers[0])+
-              Math.abs(friends[friends.length-1].answers[1] - friends[i].answers[1])+
-              Math.abs(friends[friends.length-1].answers[2] - friends[i].answers[2])+
-              Math.abs(friends[friends.length-1].answers[3] - friends[i].answers[3])+
-              Math.abs(friends[friends.length-1].answers[4] - friends[i].answers[4])+
-              Math.abs(friends[friends.length-1].answers[5] - friends[i].answers[5])+
-              Math.abs(friends[friends.length-1].answers[6] - friends[i].answers[6])+
-              Math.abs(friends[friends.length-1].answers[7] - friends[i].answers[7])+
-              Math.abs(friends[friends.length-1].answers[8] - friends[i].answers[8])
+        var matchIndex = 0;
 
-              //get the minimum matchFactor
-              if(minMatchFactor >= matchFactor){
-                  minMatchFactor = matchFactor;
-                  matchIndex = i;
-              }
-          }
-          //return the response with the closest matched object from the array
-          res.send(friends[matchIndex]);
-      });
+        for(i=0;i<friends.length; i++) {
+            let totalDifference = 0;
+
+            for(j=0;j<friends[i].scores.length; j++) {
+                let difference = Math.abs(user.scores[j] - friends[i].scores[j]);
+                totalDifference += difference;
+            }
+            if(totalDifference<minMatchFactor) {
+                matchIndex = i;
+                minMatchFactor = totalDifference;
+            }
+        };
+        friends.push(user);
+        response.json(friends[matchIndex]);
+    });
 };
-
-
-
